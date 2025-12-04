@@ -1,5 +1,7 @@
 # Luxe Edits - Video Editor Portfolio
 
+**🔴 Live Demo:** [https://akshat3410.github.io/videoeditor-portfolio/](https://akshat3410.github.io/videoeditor-portfolio/)
+
 A premium, minimalistic portfolio website designed for professional video editors. Built with React and plain CSS, featuring a luxury aesthetic, smooth animations, and a responsive layout.
 
 ![Mascot](./public/mascot.png)
