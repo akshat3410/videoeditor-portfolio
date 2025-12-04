@@ -45,7 +45,7 @@ const App = () => {
         </div>
         <div className="hero-visual">
           <div className="image-container">
-            <img src="/mascot.png" alt="Creative Director Illustration" className="mascot-image" />
+            <img src="mascot.png" alt="Creative Director Illustration" className="mascot-image" />
           </div>
         </div>
       </section>
