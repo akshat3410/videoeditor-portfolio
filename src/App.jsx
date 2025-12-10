@@ -524,94 +524,124 @@ function App() {
 
     // Mobile animations
     mm.add("(max-width: 768px)", () => {
-      // Hero text animations for mobile
+      // ===== HERO SECTION - MOBILE =====
+      // Hero title with clip-path reveal
       if (heroTitleRef.current) {
         gsap.fromTo(heroTitleRef.current,
-          { opacity: 0, y: 40 },
-          { opacity: 1, y: 0, duration: 0.8, ease: "power3.out", delay: 0.1 }
+          { opacity: 0, y: 50, clipPath: "inset(100% 0% 0% 0%)" },
+          { 
+            opacity: 1, 
+            y: 0, 
+            clipPath: "inset(0% 0% 0% 0%)",
+            duration: 1, 
+            ease: "power4.out", 
+            delay: 0.1 
+          }
         );
       }
 
+      // Hero subtitle fade up
       if (heroSubtitleRef.current) {
         gsap.fromTo(heroSubtitleRef.current,
           { opacity: 0, y: 30 },
-          { opacity: 1, y: 0, duration: 0.7, ease: "power3.out", delay: 0.3 }
+          { opacity: 1, y: 0, duration: 0.8, ease: "power3.out", delay: 0.4 }
         );
       }
 
+      // Hero buttons stagger entrance
       if (heroButtonsRef.current) {
         gsap.fromTo(heroButtonsRef.current.children,
-          { opacity: 0, y: 20 },
-          { opacity: 1, y: 0, duration: 0.6, stagger: 0.1, ease: "power3.out", delay: 0.5 }
+          { opacity: 0, y: 25, scale: 0.95 },
+          { 
+            opacity: 1, 
+            y: 0, 
+            scale: 1,
+            duration: 0.7, 
+            stagger: 0.12, 
+            ease: "back.out(1.4)", 
+            delay: 0.6 
+          }
         );
       }
 
-      // Section titles fade in on mobile
-      const titles = [portfolioTitleRef.current, aboutTitleRef.current, contactTitleRef.current];
-      titles.forEach((title) => {
-        if (title) {
-          gsap.fromTo(title,
-            { opacity: 0, y: 30 },
-            {
-              opacity: 1,
-              y: 0,
-              duration: 0.7,
-              ease: "power3.out",
-              scrollTrigger: {
-                trigger: title,
-                start: "top 88%",
-                toggleActions: "play none none none",
-              },
-            }
-          );
-        }
+      // Hero model animation
+      if (heroModelRef.current) {
+        gsap.fromTo(heroModelRef.current,
+          { opacity: 0, scale: 0.9 },
+          { opacity: 1, scale: 1, duration: 1, ease: "power3.out", delay: 0.3 }
+        );
+      }
+
+      // Hero blob subtle parallax (lightweight for mobile)
+      gsap.to(heroBlobRef.current, {
+        y: 80,
+        ease: "none",
+        scrollTrigger: {
+          trigger: heroRef.current,
+          start: "top top",
+          end: "bottom top",
+          scrub: 2,
+        },
       });
 
-      // Portfolio cards mobile
-      portfolioCardsRef.current.forEach((card, index) => {
-        if (card) {
-          gsap.fromTo(card,
-            { opacity: 0, y: 40 },
-            {
-              opacity: 1,
-              y: 0,
-              duration: 0.6,
-              ease: "power3.out",
-              scrollTrigger: {
-                trigger: card,
-                start: "top 90%",
-                toggleActions: "play none none none",
-              },
-              delay: index * 0.05,
-            }
-          );
-        }
+      gsap.to(heroBlob2Ref.current, {
+        y: 60,
+        ease: "none",
+        scrollTrigger: {
+          trigger: heroRef.current,
+          start: "top top",
+          end: "bottom top",
+          scrub: 2.5,
+        },
       });
 
-      // Skills pills mobile
-      gsap.fromTo(skillsRef.current,
-        { opacity: 0, y: 20 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.4,
-          stagger: 0.05,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: skillsContainerRef.current,
-            start: "top 88%",
-            toggleActions: "play none none none",
-          },
-        }
-      );
-
-      // Horizontal scroll for mobile
+      // ===== HORIZONTAL SCROLL SECTION - MOBILE =====
       const horizontalSection = horizontalWrapperRef.current;
       const horizontalContent = horizontalRef.current;
 
       if (horizontalSection && horizontalContent) {
         const totalScroll = horizontalContent.scrollWidth - window.innerWidth;
 
+        // Horizontal intro text
+        if (horizontalIntroRef.current) {
+          gsap.fromTo(horizontalIntroRef.current,
+            { opacity: 0, x: -40 },
+            {
+              opacity: 1,
+              x: 0,
+              duration: 0.8,
+              ease: "power3.out",
+              scrollTrigger: {
+                trigger: horizontalSection,
+                start: "top 85%",
+                toggleActions: "play none none none",
+              },
+            }
+          );
+        }
+
+        // Horizontal cards stagger animation
+        horizontalCardsRef.current.forEach((card, index) => {
+          if (card) {
+            gsap.fromTo(card,
+              { opacity: 0, y: 30 },
+              {
+                opacity: 1,
+                y: 0,
+                duration: 0.6,
+                ease: "power3.out",
+                scrollTrigger: {
+                  trigger: horizontalSection,
+                  start: "top 80%",
+                  toggleActions: "play none none none",
+                },
+                delay: 0.1 + index * 0.08,
+              }
+            );
+          }
+        });
+
+        // Horizontal scroll animation
         gsap.to(horizontalContent, {
           x: -totalScroll,
           ease: "none",
@@ -623,7 +653,269 @@ function App() {
             pin: true,
           },
         });
+
+        // Horizontal blob parallax
+        gsap.to(horizontalBlobRef.current, {
+          x: -totalScroll * 0.2,
+          ease: "none",
+          scrollTrigger: {
+            trigger: horizontalSection,
+            start: "top top",
+            end: () => `+=${totalScroll}`,
+            scrub: 2.5,
+          },
+        });
       }
+
+      // ===== PORTFOLIO SECTION - MOBILE =====
+      // Portfolio title with clip-path
+      if (portfolioTitleRef.current) {
+        gsap.fromTo(portfolioTitleRef.current,
+          { opacity: 0, y: 40, clipPath: "inset(100% 0% 0% 0%)" },
+          {
+            opacity: 1,
+            y: 0,
+            clipPath: "inset(0% 0% 0% 0%)",
+            duration: 0.9,
+            ease: "power4.out",
+            scrollTrigger: {
+              trigger: portfolioTitleRef.current,
+              start: "top 88%",
+              toggleActions: "play none none none",
+            },
+          }
+        );
+      }
+
+      // Portfolio subtitle
+      if (portfolioSubtitleRef.current) {
+        gsap.fromTo(portfolioSubtitleRef.current,
+          { opacity: 0, y: 25 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.7,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: portfolioSubtitleRef.current,
+              start: "top 90%",
+              toggleActions: "play none none none",
+            },
+            delay: 0.15,
+          }
+        );
+      }
+
+      // Portfolio cards stagger
+      portfolioCardsRef.current.forEach((card, index) => {
+        if (card) {
+          gsap.fromTo(card,
+            { opacity: 0, y: 50, scale: 0.97 },
+            {
+              opacity: 1,
+              y: 0,
+              scale: 1,
+              duration: 0.7,
+              ease: "power3.out",
+              scrollTrigger: {
+                trigger: card,
+                start: "top 92%",
+                toggleActions: "play none none none",
+              },
+              delay: index * 0.06,
+            }
+          );
+        }
+      });
+
+      // Portfolio blob parallax
+      gsap.to(portfolioBlobRef.current, {
+        y: -50,
+        ease: "none",
+        scrollTrigger: {
+          trigger: portfolioRef.current,
+          start: "top bottom",
+          end: "bottom top",
+          scrub: 2,
+        },
+      });
+
+      // ===== ABOUT SECTION - MOBILE =====
+      // About title with clip-path
+      if (aboutTitleRef.current) {
+        gsap.fromTo(aboutTitleRef.current,
+          { opacity: 0, y: 40, clipPath: "inset(100% 0% 0% 0%)" },
+          {
+            opacity: 1,
+            y: 0,
+            clipPath: "inset(0% 0% 0% 0%)",
+            duration: 0.9,
+            ease: "power4.out",
+            scrollTrigger: {
+              trigger: aboutTitleRef.current,
+              start: "top 88%",
+              toggleActions: "play none none none",
+            },
+          }
+        );
+      }
+
+      // About paragraphs slide in
+      aboutParagraphsRef.current.forEach((paragraph, index) => {
+        if (paragraph) {
+          gsap.fromTo(paragraph,
+            { opacity: 0, x: -30 },
+            {
+              opacity: 1,
+              x: 0,
+              duration: 0.8,
+              ease: "power3.out",
+              scrollTrigger: {
+                trigger: paragraph,
+                start: "top 90%",
+                toggleActions: "play none none none",
+              },
+              delay: index * 0.12,
+            }
+          );
+        }
+      });
+
+      // Skills title
+      if (skillsTitleRef.current) {
+        gsap.fromTo(skillsTitleRef.current,
+          { opacity: 0, x: 25 },
+          {
+            opacity: 1,
+            x: 0,
+            duration: 0.7,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: skillsTitleRef.current,
+              start: "top 90%",
+              toggleActions: "play none none none",
+            },
+          }
+        );
+      }
+
+      // Skills pills stagger with bounce
+      gsap.fromTo(skillsRef.current,
+        { opacity: 0, y: 25, scale: 0.9 },
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 0.5,
+          stagger: 0.07,
+          ease: "back.out(1.5)",
+          scrollTrigger: {
+            trigger: skillsContainerRef.current,
+            start: "top 88%",
+            toggleActions: "play none none none",
+          },
+        }
+      );
+
+      // About blob parallax
+      gsap.to(aboutBlobRef.current, {
+        y: -40,
+        ease: "none",
+        scrollTrigger: {
+          trigger: aboutRef.current,
+          start: "top bottom",
+          end: "bottom top",
+          scrub: 2,
+        },
+      });
+
+      // ===== CONTACT SECTION - MOBILE =====
+      // Contact title with clip-path
+      if (contactTitleRef.current) {
+        gsap.fromTo(contactTitleRef.current,
+          { opacity: 0, y: 40, clipPath: "inset(100% 0% 0% 0%)" },
+          {
+            opacity: 1,
+            y: 0,
+            clipPath: "inset(0% 0% 0% 0%)",
+            duration: 0.9,
+            ease: "power4.out",
+            scrollTrigger: {
+              trigger: contactTitleRef.current,
+              start: "top 88%",
+              toggleActions: "play none none none",
+            },
+          }
+        );
+      }
+
+      // Contact subtitle
+      if (contactSubtitleRef.current) {
+        gsap.fromTo(contactSubtitleRef.current,
+          { opacity: 0, y: 25 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.7,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: contactSubtitleRef.current,
+              start: "top 90%",
+              toggleActions: "play none none none",
+            },
+            delay: 0.15,
+          }
+        );
+      }
+
+      // Contact form slide in from left
+      if (contactFormRef.current) {
+        gsap.fromTo(contactFormRef.current,
+          { opacity: 0, x: -40 },
+          {
+            opacity: 1,
+            x: 0,
+            duration: 0.9,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: contactFormRef.current,
+              start: "top 88%",
+              toggleActions: "play none none none",
+            },
+          }
+        );
+      }
+
+      // Contact info slide in from right
+      if (contactInfoRef.current) {
+        gsap.fromTo(contactInfoRef.current,
+          { opacity: 0, x: 40 },
+          {
+            opacity: 1,
+            x: 0,
+            duration: 0.9,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: contactInfoRef.current,
+              start: "top 88%",
+              toggleActions: "play none none none",
+            },
+            delay: 0.15,
+          }
+        );
+      }
+
+      // Contact blob parallax
+      gsap.to(contactBlobRef.current, {
+        y: -35,
+        ease: "none",
+        scrollTrigger: {
+          trigger: contactRef.current,
+          start: "top bottom",
+          end: "bottom top",
+          scrub: 2,
+        },
+      });
     });
 
     return () => {
