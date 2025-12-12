@@ -596,12 +596,10 @@ function App() {
       });
 
       // ===== HORIZONTAL SCROLL SECTION - MOBILE =====
+      // UPDATED: Removed pinned horizontal scroll. Animation just fades straight to normal layout.
       const horizontalSection = horizontalWrapperRef.current;
-      const horizontalContent = horizontalRef.current;
-
-      if (horizontalSection && horizontalContent) {
-        const totalScroll = horizontalContent.scrollWidth - window.innerWidth;
-
+      
+      if (horizontalSection) {
         // Horizontal intro text
         if (horizontalIntroRef.current) {
           gsap.fromTo(horizontalIntroRef.current,
@@ -620,7 +618,7 @@ function App() {
           );
         }
 
-        // Horizontal cards stagger animation
+        // Horizontal cards stagger animation (Fade in only)
         horizontalCardsRef.current.forEach((card, index) => {
           if (card) {
             gsap.fromTo(card,
@@ -631,8 +629,8 @@ function App() {
                 duration: 0.6,
                 ease: "power3.out",
                 scrollTrigger: {
-                  trigger: horizontalSection,
-                  start: "top 80%",
+                  trigger: horizontalSection, // Use section as trigger if card is too far down? No, standard is fine.
+                  start: "top 90%", // Trigger earlier
                   toggleActions: "play none none none",
                 },
                 delay: 0.1 + index * 0.08,
@@ -641,28 +639,15 @@ function App() {
           }
         });
 
-        // Horizontal scroll animation
-        gsap.to(horizontalContent, {
-          x: -totalScroll,
-          ease: "none",
-          scrollTrigger: {
-            trigger: horizontalSection,
-            start: "top top",
-            end: () => `+=${totalScroll}`,
-            scrub: 1,
-            pin: true,
-          },
-        });
-
-        // Horizontal blob parallax
+        // Blob Animation - Vertical only for mobile
         gsap.to(horizontalBlobRef.current, {
-          x: -totalScroll * 0.2,
+          y: 50,
           ease: "none",
           scrollTrigger: {
             trigger: horizontalSection,
-            start: "top top",
-            end: () => `+=${totalScroll}`,
-            scrub: 2.5,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: 2,
           },
         });
       }
