@@ -1,31 +1,37 @@
-# Luxe Edits - Video Editor Portfolio
+# Cinematic Video Editor Portfolio
 
 **🔴 Live Demo:** [https://akshat3410.github.io/videoeditor-portfolio/](https://akshat3410.github.io/videoeditor-portfolio/)
 
-A premium, minimalistic portfolio website designed for professional video editors. Built with React and plain CSS, featuring a luxury aesthetic, smooth animations, and a responsive layout.
+A premium, high-performance portfolio website designed for professional video editors. Built with React, GSAP, and native CSS, featuring a "Midnight Aura" cinematic aesthetic, smooth parallax animations, and optimized mobile interactions.
 
 ![Mascot](./public/mascot.png)
 
 ## 🌟 Features
 
-*   **Premium Aesthetic**: Minimalist luxury design with a soft beige and warm brown color palette.
-*   **Responsive Design**: Fully responsive layout that looks great on mobile, tablet, and desktop.
-*   **Smooth Navigation**: Sticky navbar with smooth scrolling to sections.
-*   **Portfolio Grid**: Showcase your best work with elegant cards and hover effects.
-*   **Contact Form**: Functional-looking contact form (frontend only).
-*   **Custom Mascot**: Unique branding with a custom-generated minimalist illustration.
+*   **Midnight Aura Theme**: Deep "Void Black" (`#030305`) background with "Electric Violet" (`#6C5CE7`) and "Cyber Cyan" (`#00F0FF`) neon accents.
+*   **Cinematic Experience**: Distraction-free dark interface that makes video content pop.
+*   **GSAP Animations**:
+    *   Smooth entry animations (staggered fade-ups, text reveals).
+    *   Mouse-driven and scroll-driven parallax background blobs ("Light Leaks").
+    *   Complex pinned scroll animations (Desktop).
+*   **Mobile Optimized**:
+    *   Native horizontal swipe scrolling for the "Featured Work" reel.
+    *   Touch-friendly card sizing and layout adaptations.
+*   **Performance**: Zero external UI libraries—pure CSS and GSAP for maximum speed.
+*   **Contact Form**: Styled, functional-looking input layout.
 
 ## 🛠️ Tech Stack
 
-*   **React**: UI Library (Functional components + Hooks)
-*   **Vite**: Fast build tool and development server
-*   **CSS3**: Custom styling with CSS variables (No external UI libraries)
+*   **React**: UI Architecture (Functional components + Hooks)
+*   **GSAP (GreenSock)**: Advanced animations, ScrollTrigger, and timeline management.
+*   **CSS3**: Custom variables, Grid/Flexbox layouts, scroll-snapping, and glassmorphism.
+*   **Vite**: Next-gen frontend tooling.
 
 ## 🚀 Getting Started
 
 ### Prerequisites
 
-*   Node.js (v14 or higher)
+*   Node.js (v14+)
 *   npm or yarn
 
 ### Installation
@@ -55,12 +61,13 @@ The application will be available at `http://localhost:5173`.
 
 ## 🎨 Color Palette
 
-| Color | Hex | Usage |
-|-------|-----|-------|
-| **Primary Background** | `#F9F8F6` | Main page background |
-| **Card Background** | `#EFE9E3` | Sections and cards |
-| **Soft Accent** | `#D9CFC7` | Borders and subtle details |
-| **Primary Accent** | `#C9B59C` | Buttons, highlights, text |
+| Color Role | Hex Code | Visual Logic |
+|------------|----------|--------------|
+| **Void BG** | `#030305` | Infinite depth, cinematic feel |
+| **Surface** | `#0E0E12` | Matte separation for cards |
+| **Primary Brand** | `#6C5CE7` | Electric Violet (Creativity/Royalty) |
+| **Highlight** | `#00F0FF` | Cyber Cyan (Tech/Precision) |
+| **Text Main** | `#FDFDFD` | Studio White for legibility |
 
 ## 📄 License
 
